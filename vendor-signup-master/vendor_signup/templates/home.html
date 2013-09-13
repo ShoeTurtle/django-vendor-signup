@@ -2,20 +2,19 @@
 <html>
 <head>
 	<link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-	<link href="{{ STATIC_URL }}css/bootstrap-theme.css" rel="stylesheet">
-	
-	<!-- <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.5/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/> -->
+	<link href="{{ STATIC_URL }}css/bootstrap-theme.css" rel="stylesheet">	
+	<link href="{{ STATIC_URL }}css/bootstrap-editable.css" rel="stylesheet"/>
+	<link href="{{ STATIC_URL }}css/font-awesome.css" rel="stylesheet">
 
-   
-    <title>Vendor Scale</title>
-    
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-	<script src="{{ STATIC_URL }}js/vs-custom.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery-1.9.1.js"></script>	
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>	
+	<script src="{{ STATIC_URL }}js/knockout-2.3.0.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-editable.js"></script>
+	<script src="{{ STATIC_URL }}js/knockout.x-editable.js"></script>
 	
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
-	<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.5/bootstrap-editable/js/bootstrap-editable.min.js"></script> -->
+	<script src="{{ STATIC_URL }}js/vs-custom.js"></script>	
 	
+	<title>Vendor Scale</title>	
 
 </head>
 
@@ -24,8 +23,8 @@
 <div class="container">
     
 	<div class="page-header">
-		<h1 class="" style="opacity: 0.8;">Vendor Scale <span style="font-size: 28px;">Register your projects.</span></h1>
-		<h3 style="opacity: 0.8;">Company Name Goes Here</h3>
+		<h2 class="" style="opacity: 0.8;" id="test">Vendor-Scale <span style="font-size: 28px; padding-left: 1%;">Registering your projects.</span></h2>
+		<h1 style="opacity: 0.9;">{{ vendor_title }}</h1>
     </div>
 	
 	<div class="row">
@@ -74,8 +73,8 @@
 				    
 					<tbody data-bind="foreach: ko_project_data">
 				        <tr>
-				            <td data-bind="text: title"></td>
-				            <td data-bind="text: url"></td>
+				            <td><a href="#" data-bind="editable: title" data-vs-type='title'></a></td>
+				            <td><a href="#" data-bind="editable: url" data-vs-type='url'></a></td>
 							<td>
 								<button data-bind="click: $parent.removeProject" type="default" class="btn btn-default btn-xs">
 									<span class="glyphicon glyphicon-minus" style="color: lightcoral;"></span>
@@ -91,7 +90,7 @@
 	    	</div>
 	  	</div>
 	</div>
-
+	
 </div>
 
 </body>

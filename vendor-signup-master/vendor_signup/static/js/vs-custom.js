@@ -1,5 +1,28 @@
 $(document).ready(function(){
 	
+	
+	$.fn.editable.defaults.mode = 'inline';	
+	
+	$.fn.editable.defaults.validate = function(value) {
+	
+		var titleReg = /^\s*[a-zA-Z0-9,\s]+\s*$/;
+		var urlReg = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;	
+
+		//Checking out the type of data via the custom data-vs-type attribute
+		var type = $(this).attr('data-vs-type');
+
+		if(type == 'title') {
+			if(!titleReg.test(value))
+				return('Invalid Project Title');
+		}
+		
+		if(type == 'url') {
+			if(!urlReg.test(value))
+				return('Invalid Project URL');
+		}
+		
+	};
+	
 	function Project(data) {		
 		var self = this;
 	
@@ -56,6 +79,25 @@ $(document).ready(function(){
 			//ToDo:
 			//1. Save the model data into mysql
 			//2. Redirect to the homepage
+			
+			var project_data = [];
+			
+			$.each(self.ko_project_data(), function(index, value) {
+				project_data.push({title: value.title(), url: value.url()});
+			});
+			
+			var data_to_send = {project_data: JSON.stringify(project_data)};
+			$.ajax({
+				type: 'GET',
+				url: 'http://localhost:8000/vendor/saveproject/',
+				data: data_to_send,
+				success: function(data) {
+					alert('SUCCESS');
+				},
+				error: function(data) {
+					alert('FAILS');
+				}
+			});
 		}
 	}
 	
